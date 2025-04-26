@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const stores = [
@@ -8,8 +9,10 @@ const stores = [
 ];
 
 const Homepage = () => {
+  const navigate = useNavigate();
+
   const handleClick = (storeName) => {
-    console.log(`Selected store: ${storeName}`);
+    navigate('/track', { state: { storeName } }); // Passing store name
   };
 
   return (
