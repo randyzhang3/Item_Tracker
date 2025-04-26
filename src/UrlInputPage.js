@@ -8,8 +8,12 @@ const UrlInputPage = () => {
   const [success, setSuccess] = useState(false);
 
   const location = useLocation();
-  const storeName = location.state?.storeName || 'Store'; // fallback if no store passed
+  const storeName = location.state?.storeName || 'Store';
 
+
+  // We also need to add a section where if the actual link doesn't work, we send out the message as well
+  // Most likely going to be a try/catch code block or function
+  // Currently only handles looking to see if the link has the stores https but not if it actually works
   const validateUrl = (inputUrl) => {
     if (storeName === "Amazon" && !inputUrl.startsWith("https://www.amazon.com/")) {
       return "Please provide a valid link for Amazon.";
@@ -33,7 +37,6 @@ const UrlInputPage = () => {
       setError('');
       setSuccess(true);
       console.log('URL to track:', url);
-      // You could send this to a backend or next step
     }
   };
 
