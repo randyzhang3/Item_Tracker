@@ -1,0 +1,27 @@
+[
+    {
+      "productName": "Amazon Echo Dot (5th Gen)",
+      "url": "https://www.amazon.com/echo-dot-5th-gen/dp/B09B8V1LZP/",
+      "currentPrice": 39.99,
+      "fiftyTwoWeekHigh": 59.99,
+      "fiftyTwoWeekLow": 29.99,
+      "medianPrice": 49.99
+    },
+    {
+      "productName": "Walmart AirPods Pro",
+      "url": "https://www.walmart.com/ip/Apple-AirPods-Pro/520468661",
+      "currentPrice": 189.00,
+      "fiftyTwoWeekHigh": 249.00,
+      "fiftyTwoWeekLow": 179.00,
+      "medianPrice": 219.00
+    },
+    {
+      "productName": "Target Instant Pot Duo",
+      "url": "https://www.target.com/p/instant-pot-duo-7-in-1-pressure-cooker/-/A-76543443",
+      "currentPrice": 89.99,
+      "fiftyTwoWeekHigh": 129.99,
+      "fiftyTwoWeekLow": 69.99,
+      "medianPrice": 99.99
+    }
+  ]
+  

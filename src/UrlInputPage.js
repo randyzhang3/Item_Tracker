@@ -1,44 +1,67 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const UrlInputPage = () => {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-
+  const [products, setProducts] = useState([]);
+  
   const location = useLocation();
-  const storeName = location.state?.storeName || 'Store';
+  const navigate = useNavigate();
+  const storeName = location.state?.storeName;
 
+  useEffect(() => {
+    fetch('/Dummy.json')
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.error('Failed to load products:', err));
+  }, []);
 
-  // We also need to add a section where if the actual link doesn't work, we send out the message as well
-  // Most likely going to be a try/catch code block or function
-  // Currently only handles looking to see if the link has the stores https but not if it actually works
-  const validateUrl = (inputUrl) => {
+  const validateStoreURL = (inputUrl) => {
     if (storeName === "Amazon" && !inputUrl.startsWith("https://www.amazon.com/")) {
-      return "Please provide a valid link for Amazon.";
+      return false;
     }
     if (storeName === "Walmart" && !inputUrl.startsWith("https://www.walmart.com/")) {
-      return "Please provide a valid link for Walmart.";
+      return false;
     }
     if (storeName === "Target" && !inputUrl.startsWith("https://www.target.com/")) {
-      return "Please provide a valid link for Target.";
+      return false;
     }
-    return "";
+    return true;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationError = validateUrl(url);
-    if (validationError) {
-      setError(validationError);
-      setSuccess(false);
-    } else {
-      setError('');
-      setSuccess(true);
-      console.log('URL to track:', url);
+  const validateUrl = (inputUrl) => {
+    if (!validateStoreURL(inputUrl)) {
+      return `Please input a valid URL for ${storeName}`;
     }
+
+    const match = products.find((product) => product.url === inputUrl);
+    if (!match) {
+      console.log("not working")
+      return `Product not found in our database for ${storeName}.`;
+    }
+
+    return '';
   };
+
+  
+const handleSubmit = async (e) => {
+      e.preventDefault();
+      const validationError = await validateUrl(url);
+      if (validationError) {
+        setError(validationError);
+        setSuccess(false);
+      } else {
+        setError('');
+        setSuccess(true);
+        console.log('correct URL to track:', url);
+        const product = products.find((product) => product.url === url);
+        navigate('/analytics', { state: { product, url } });
+      }
+    };
+    
 
   return (
     <div className="container py-5 text-center">
