@@ -1,27 +1,68 @@
 [
-    {
-      "productName": "Amazon Echo Dot (5th Gen)",
-      "url": "https://www.amazon.com/echo-dot-5th-gen/dp/B09B8V1LZP/",
-      "currentPrice": 39.99,
-      "fiftyTwoWeekHigh": 59.99,
-      "fiftyTwoWeekLow": 29.99,
-      "medianPrice": 49.99
-    },
-    {
-      "productName": "Walmart AirPods Pro",
-      "url": "https://www.walmart.com/ip/Apple-AirPods-Pro/520468661",
-      "currentPrice": 189.00,
-      "fiftyTwoWeekHigh": 249.00,
-      "fiftyTwoWeekLow": 179.00,
-      "medianPrice": 219.00
-    },
-    {
-      "productName": "Target Instant Pot Duo",
-      "url": "https://www.target.com/p/instant-pot-duo-7-in-1-pressure-cooker/-/A-76543443",
-      "currentPrice": 89.99,
-      "fiftyTwoWeekHigh": 129.99,
-      "fiftyTwoWeekLow": 69.99,
-      "medianPrice": 99.99
-    }
-  ]
-  
+  {
+    "productName": "Amazon Echo Dot (5th Gen)",
+    "url": "https://www.amazon.com/echo-dot-5th-gen/dp/B09B8V1LZP/",
+    "currentPrice": 39.99,
+    "fiftyTwoWeekHigh": 59.99,
+    "fiftyTwoWeekLow": 29.99,
+    "medianPrice": 49.99,
+    "priceHistory": [
+      { "month": "April", "price": 39.99 },
+      { "month": "May", "price": 42.49 },
+      { "month": "June", "price": 44.99 },
+      { "month": "July", "price": 49.99 },
+      { "month": "August", "price": 45.99 },
+      { "month": "September", "price": 43.49 },
+      { "month": "October", "price": 44.99 },
+      { "month": "November", "price": 47.99 },
+      { "month": "December", "price": 49.99 },
+      { "month": "January", "price": 46.49 },
+      { "month": "February", "price": 45.99 },
+      { "month": "March", "price": 39.99 }
+    ]
+  },
+  {
+    "productName": "Walmart AirPods Pro",
+    "url": "https://www.walmart.com/ip/Apple-AirPods-Pro/520468661",
+    "currentPrice": 189.00,
+    "fiftyTwoWeekHigh": 249.00,
+    "fiftyTwoWeekLow": 179.00,
+    "medianPrice": 219.00,
+    "priceHistory": [
+      { "month": "April", "price": 189.00 },
+      { "month": "May", "price": 195.00 },
+      { "month": "June", "price": 199.00 },
+      { "month": "July", "price": 209.00 },
+      { "month": "August", "price": 209.99 },
+      { "month": "September", "price": 204.00 },
+      { "month": "October", "price": 199.99 },
+      { "month": "November", "price": 215.00 },
+      { "month": "December", "price": 219.00 },
+      { "month": "January", "price": 212.00 },
+      { "month": "February", "price": 199.00 },
+      { "month": "March", "price": 189.00 }
+    ]
+  },
+  {
+    "productName": "Target Instant Pot Duo",
+    "url": "https://www.target.com/p/instant-pot-duo-7-in-1-pressure-cooker/-/A-76543443",
+    "currentPrice": 89.99,
+    "fiftyTwoWeekHigh": 129.99,
+    "fiftyTwoWeekLow": 69.99,
+    "medianPrice": 99.99,
+    "priceHistory": [
+      { "month": "April", "price": 89.99 },
+      { "month": "May", "price": 94.99 },
+      { "month": "June", "price": 99.00 },
+      { "month": "July", "price": 109.99 },
+      { "month": "August", "price": 105.00 },
+      { "month": "September", "price": 99.99 },
+      { "month": "October", "price": 109.00 },
+      { "month": "November", "price": 119.99 },
+      { "month": "December", "price": 120.00 },
+      { "month": "January", "price": 115.00 },
+      { "month": "February", "price": 99.99 },
+      { "month": "March", "price": 89.99 }
+    ]
+  }
+]
