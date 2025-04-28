@@ -12,11 +12,11 @@ const Homepage = () => {
   const navigate = useNavigate();
 
   const handleClick = (storeName) => {
-    navigate('/track', { state: { storeName } }); // Passing store name
+    navigate('/track', { state: { storeName } });
   };
 
   return (
-    <div className="container py-5 text-center">
+    <div className="container py-5 text-center" style={{ backgroundColor: '#007bff', color: 'white', minHeight: '100vh', minWidth: '100vw' }}>
       <h1 className="mb-5 fw-bold">
         Select an online store you'd like to track an item from:
       </h1>

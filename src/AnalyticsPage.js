@@ -64,13 +64,13 @@ const AnalyticsPage = () => {
   };
 
   return (
-    <div className="container py-5 text-center position-relative">
-      <button 
-        onClick={() => navigate(-1)}
+    <div className="container py-5 text-center" style={{ backgroundColor: '#007bff', color: 'white', minHeight: '100vh', minWidth: '100vw' }}>
+      <button
+        onClick={() => navigate('/track', { state: { storeName } })}
         className="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
-        style={{ width: '40px', height: '40px', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}
-      >
-        <i className="bi bi-arrow-left"></i>
+        style={{ width: '10vh', height: '10vh' }}
+        >
+          <i className="bi bi-arrow-left"></i>
       </button>
 
       <h1 className="mb-4">Analytics for {product.productName}</h1>
