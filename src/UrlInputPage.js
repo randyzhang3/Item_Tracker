@@ -3,21 +3,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+const storeData = {
+    Amazon: { img: "/images/amazon.png", color: "#f7b733", urlPrefix: "https://www.amazon.com/" },
+    Target: { img: "/images/target.png", color: "#fc4a1a", urlPrefix: "https://www.target.com/" },
+    Walmart: { img: "/images/walmart.png", color: "#4facfe", urlPrefix: "https://www.walmart.com/" }
+};
+
 const UrlInputPage = () => {
-    const stores = [
-        { name: "Amazon", img: "/images/amazon.png" },
-        { name: "Target", img: "/images/target.png" },
-        { name: "Walmart", img: "/images/walmart.png" }
-    ];
     const [url, setUrl] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [products, setProducts] = useState([]);
-    
+
     const location = useLocation();
     const navigate = useNavigate();
     const storeName = location.state?.storeName;
-    const store = stores.find(s => s.name === storeName);
+    const store = storeData[storeName];
 
     useEffect(() => {
         fetch('/Dummy.json')
@@ -26,81 +27,98 @@ const UrlInputPage = () => {
             .catch(err => console.error('Failed to load products:', err));
     }, []);
 
-    const validateStoreURL = (inputUrl) => {
-        if (storeName === "Amazon" && !inputUrl.startsWith("https://www.amazon.com/")) {
-            return false;
-        }
-        if (storeName === "Walmart" && !inputUrl.startsWith("https://www.walmart.com/")) {
-            return false;
-        }
-        if (storeName === "Target" && !inputUrl.startsWith("https://www.target.com/")) {
-            return false;
-        }
-        return true;
-    };
-
     const validateUrl = (inputUrl) => {
-        if (!validateStoreURL(inputUrl)) {
+        if (!inputUrl.startsWith(store?.urlPrefix)) {
             return `Please input a valid URL for ${storeName}`;
         }
-        const match = products.find((product) => product.url === inputUrl);
+        const match = products.find(product => product.url === inputUrl);
         if (!match) {
             return `Product not found in our database for ${storeName}.`;
         }
         return '';
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const validationError = await validateUrl(url);
+        const validationError = validateUrl(url);
         if (validationError) {
             setError(validationError);
             setSuccess(false);
         } else {
             setError('');
             setSuccess(true);
-            const product = products.find((product) => product.url === url);
-            navigate('/analytics', { state: { product, url, storeName: store.name } });
+            const product = products.find(product => product.url === url);
+            navigate('/analytics', { state: { product, url, storeName } });
         }
     };
 
+    if (!store) return <div>Store not found.</div>;
+
     return (
-        <div className="container py-5 text-center" style={{ backgroundColor: '#007bff', color: 'white', minHeight: '100vh', minWidth: '100vw' }}>
+        <div className="d-flex flex-column align-items-center justify-content-center" style={{ backgroundColor: '#f5f6fa', minHeight: '100vh', width: '100vw', position: 'relative' }}>
             <button
                 onClick={() => navigate('/')}
-                className="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
-                style={{ width: '10vh', height: '10vh' }}
+                className="btn rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
+                style={{ backgroundColor: store.color, width: '10vh', height: '10vh', border: 'none' }}
             >
-                <i className="bi bi-arrow-left"></i>
+                <i className="bi bi-arrow-left text-white"></i>
             </button>
-            <img
-                src={store.img}
-                alt={store.name}
-                style={{ height: "25vh", objectFit: "contain" }}
-            />
-            <div style={{ maxWidth: '50vw', margin: '0 auto' }}>
-                <h1 style={{ fontSize: '6vh', marginBottom: '2vh' }}>What Product do you want to track?</h1>
-                <h2 style={{ fontSize: '5vh' }}>We'll show you all the price information from the last 52 weeks.</h2>
+
+            <div className="text-center">
+                <div
+                    className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4"
+                    style={{ backgroundColor: store.color, width: '20vh', height: '20vh' }}
+                >
+                    <img
+                        src={store.img}
+                        alt={storeName}
+                        style={{ height: '12vh', objectFit: 'contain' }}
+                    />
+                </div>
+
+                <h1 style={{ color: store.color, fontWeight: 'bold', marginBottom: '1rem', fontSize: '5vh' }}>
+                    What product do you want to track?
+                </h1>
+                <p className="mb-4" style={{ fontSize: '2.5vh' }}>
+                    We'll show you all the price info from the past 52 weeks.
+                </p>
+
+                <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center w-100" style={{ maxWidth: '400px' }}>
+                    <div className="input-group mb-3 w-100">
+                        <input
+                            type="text"
+                            className={`form-control ${error ? 'is-invalid' : success ? 'is-valid' : ''}`}
+                            placeholder={`Paste your ${storeName} URL here...`}
+                            value={url}
+                            onChange={(e) => {
+                                setUrl(e.target.value);
+                                setError('');
+                                setSuccess(false);
+                            }}
+                        />
+                        <button
+                            type="submit"
+                            className="btn"
+                            style={{
+                                backgroundColor: store.color,
+                                border: 'none',
+                                padding: '0 1rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <i className="bi bi-arrow-right text-white"></i>
+                        </button>
+                    </div>
+                    {error && <div className="text-danger mb-3">{error}</div>}
+                    {success && <div className="text-success mb-3">URL looks good!</div>}
+                </form>
             </div>
-            <form onSubmit={handleSubmit} className="d-flex flex-column align-items-center">
-                <input
-                    type="text"
-                    className={`form-control mb-2 ${error ? 'is-invalid' : success ? 'is-valid' : ''}`}
-                    placeholder={`Place your ${store?.name} URL here.`}
-                    style={{ maxWidth: '400px' }}
-                    value={url}
-                    onChange={(e) => {
-                        setUrl(e.target.value);
-                        setError('');
-                        setSuccess(false);
-                    }}
-                />
-                {error && <div className="text-danger mb-3">{error}</div>}
-                {success && <div className="text-success mb-3">URL looks good!</div>}
-                <button type="submit" className="btn btn-primary">
-                    Track Item
-                </button>
-            </form>
+
+            <div className="position-absolute bottom-0 mb-2 small text-muted">
+                © Price Info Tracker. All Rights Reserved.
+            </div>
         </div>
     );
 };
