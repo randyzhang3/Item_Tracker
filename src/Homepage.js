@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 
 const stores = [
-  { name: "Amazon", img: "/images/amazon.png", color: "#f7b733" },
+  { name: "Amazon", img: "/images/amazon.svg", color: "#f7b733" },
   { name: "Target", img: "/images/target.png", color: "#fc4a1a" },
   { name: "Walmart", img: "/images/walmart.png", color: "#4facfe" },
 ];
