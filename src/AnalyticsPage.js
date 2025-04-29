@@ -109,31 +109,43 @@ const AnalyticsPage = () => {
             </div>
           </div>
 
-          <div className="row justify-content-center mt-2">
-            <div className="col-md-12 text-center">
-              <div className="d-flex align-items-start bg-white shadow rounded p-4">
-                <div className="flex-grow-1">
-                  <p>If the price drops below <strong>this amount:</strong></p>
-                  <input
-                    type="number"
-                    className="form-control mb-3"
-                    value={threshold}
-                    onChange={handleThresholdChange}
-                  />
-                  <p className="mt-3">or by <strong>this percentage:</strong></p>
-                  <input
-                    type="number"
-                    className="form-control"
-                    value={percentage}
-                    onChange={handlePercentageChange}
-                  />
+          <div className="row justify-content-center mt-4">
+            <div className="col-md-12">
+              <div className="d-flex flex-column flex-md-row bg-white shadow rounded p-4 w-100 align-items-center justify-content-between">
+                <div className="w-100 me-md-4">
+                  <div className="d-flex align-items-center mb-3 flex-wrap">
+                    <span className="me-2">If the price drops below <strong>this amount:</strong></span>
+                    <input
+                      type="number"
+                      className="form-control rounded-pill text-center shadow-sm"
+                      style={{ maxWidth: '120px' }}
+                      value={threshold}
+                      onChange={handleThresholdChange}
+                    />
+                  </div>
+
+                  <div className="d-flex align-items-center flex-wrap">
+                    <span className="me-2">or by <strong>this percentage:</strong></span>
+                    <input
+                      type="number"
+                      className="form-control rounded-pill text-center shadow-sm"
+                      style={{ maxWidth: '120px' }}
+                      value={percentage}
+                      onChange={handlePercentageChange}
+                    />
+                  </div>
                 </div>
-                <button onClick={handleAlertSubmit} className="btn btn-primary ms-4 px-4 py-3">
+
+                <button
+                  onClick={handleAlertSubmit}
+                  className="btn btn-primary rounded-pill fw-bold px-4 py-3 mt-3 mt-md-0 w-50 w-md-auto"
+                >
                   NOTIFY ME!
                 </button>
               </div>
             </div>
           </div>
+
         </div>
 
         <div className="col-md-6">
