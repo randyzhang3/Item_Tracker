@@ -1,30 +1,49 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 
 const stores = [
   { name: "Amazon", img: "/images/amazon.png", color: "#f7b733" },
   { name: "Target", img: "/images/target.png", color: "#fc4a1a" },
-  { name: "Walmart", img: "/images/walmart.png", color: "#4facfe" }
+  { name: "Walmart", img: "/images/walmart.png", color: "#4facfe" },
 ];
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const [showFAQ, setShowFAQ] = useState(false);
 
   const handleClick = (storeName) => {
-    navigate('/track', { state: { storeName } });
+    navigate("/track", { state: { storeName } });
+  };
+
+  const helpButtonClick = () => {
+    setShowFAQ(true);
   };
 
   return (
-    <div className="container-fluid py-5 d-flex flex-column align-items-center" style={{ backgroundColor: '#f5f6fa', minHeight: '100vh' }}>
+    <div
+      className="container-fluid py-5 d-flex flex-column align-items-center"
+      style={{ backgroundColor: "#f5f6fa", minHeight: "100vh" }}
+    >
       <div className="text-center mb-4">
-        <h1 className="fw-bold" style={{ color: '#333', fontSize: '36px' }}>Welcome</h1>
-        <h2 className="fw-bold" style={{ color: '#3b82f6', fontSize: '32px' }}>
+        <h1 className="fw-bold" style={{ color: "#333", fontSize: "36px" }}>
+          Welcome
+        </h1>
+        <h2 className="fw-bold" style={{ color: "#3b82f6", fontSize: "32px" }}>
           Select a Retailer:
         </h2>
       </div>
 
-      <div className="p-4" style={{ backgroundColor: 'white', borderRadius: '20px', boxShadow: '0 8px 24px rgba(0,0,0,0.1)', maxWidth: '900px', width: '100%' }}>
+      <div
+        className="p-4"
+        style={{
+          backgroundColor: "white",
+          borderRadius: "20px",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+          maxWidth: "900px",
+          width: "100%",
+        }}
+      >
         <div className="row justify-content-center">
           {stores.map((store) => (
             <div
@@ -37,32 +56,93 @@ const Homepage = () => {
                 <div
                   style={{
                     backgroundColor: store.color,
-                    borderRadius: '20px',
-                    padding: '20px',
-                    width: '120px',
-                    height: '120px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                    borderRadius: "20px",
+                    padding: "20px",
+                    width: "120px",
+                    height: "120px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
                   }}
                 >
                   <img
                     src={store.img}
                     alt={store.name}
-                    style={{ maxWidth: '80%', maxHeight: '80%', objectFit: 'contain' }}
+                    style={{
+                      maxWidth: "80%",
+                      maxHeight: "80%",
+                      objectFit: "contain",
+                    }}
                   />
                 </div>
                 <div className="mt-2">
-                  <h5 style={{ fontSize: '16px', color: '#333' }}>{store.name}</h5>
+                  <h5 style={{ fontSize: "16px", color: "#333" }}>
+                    {store.name}
+                  </h5>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <div
+          className="position-fixed"
+          style={{
+            bottom: "20px",
+            right: "20px",
+            zIndex: 1000,
+          }}
+        >
+          <button
+            className="btn btn-primary rounded-circle"
+            style={{
+              width: "60px",
+              height: "60px",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onClick={helpButtonClick}
+          >
+            ?
+          </button>
+        </div>
       </div>
 
-      <footer className="mt-auto text-center py-3" style={{ fontSize: '12px', color: '#888' }}>
+      {showFAQ && (
+        <div
+          className="position-fixed top-50 start-50 translate-middle p-4"
+          style={{
+            backgroundColor: "white",
+            borderRadius: "20px",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+            zIndex: 1050,
+            width: "80%",
+            maxWidth: "500px",
+          }}
+        >
+          <h3 className="text-center mb-3" style={{ color: "#333" }}>
+            FAQ
+          </h3>
+          <div className="d-flex flex-column gap-3">
+            <button className="btn btn-outline-primary">FAQ 1</button>
+            <button className="btn btn-outline-primary">FAQ 2</button>
+            <button className="btn btn-outline-primary">FAQ 3</button>
+          </div>
+          <button
+            className="btn btn-danger mt-4 w-100"
+            onClick={() => setShowFAQ(false)}
+          >
+            Close Window
+          </button>
+        </div>
+      )}
+
+      <footer
+        className="mt-auto text-center py-3"
+        style={{ fontSize: "12px", color: "#888" }}
+      >
         © Price Info Tracker. All Rights Reserved.
       </footer>
     </div>
