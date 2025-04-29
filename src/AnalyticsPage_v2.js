@@ -85,61 +85,31 @@ const AnalyticsPage = () => {
       </button>
 
       <div className="row justify-content-center align-items-start">
-        <div className="col-md-6">
-          <div className="row">
-            <p className="fw-bold text-primary text-center">Product Selected: <span className="text-dark">{product.productName}</span></p>
-          </div>
-          
-          <div className="row justify-content-center mt-4">
-            <div className="col-md-6 text-center">
-              <img src={product.imageUrl} alt={product.productName} className="img-fluid mb-3 shadow rounded" style={{ maxHeight: '250px' }} />
-            </div>
-            <div className="col-md-6">
-              <div className="bg-white shadow rounded p-3 text-center">
-                <p className="mb-1 text-muted small">Amazon.com</p>
-                <h4 className="text-primary">Current Price: <span className="fw-bold">${product.currentPrice}</span></h4>
-                <div className="d-flex flex-wrap justify-content-center gap-2 mt-3">
-                  <button className="btn btn-danger">Target ${product.targetPrice || '82.37'}</button>
-                  <button className="btn btn-warning">Walmart ${product.walmartPrice || '79.43'}</button>
-                  <button className="btn btn-secondary">Etsy ${product.etsyPrice || '102.58'}</button>
-                  <button className="btn btn-info">Alibaba ${product.alibabaPrice || '91.24'}</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="col-md-3 text-center">
+          <p className="fw-bold text-primary">Product Selected: <span className="text-dark">{product.productName}</span></p>
+          <img src={product.imageUrl} alt={product.productName} className="img-fluid mb-3 shadow rounded" style={{ maxHeight: '250px' }} />
+        </div>
 
-          <div className="row justify-content-center mt-4">
-            <div className="col-md-10 d-flex align-items-center bg-white shadow rounded p-4">
-              <div className="flex-grow-1">
-                <p>If the price drops below <strong>this amount:</strong></p>
-                <input
-                  type="number"
-                  className="form-control mb-3"
-                  value={threshold}
-                  onChange={handleThresholdChange}
-                />
-                <p className="mt-3">or by <strong>this percentage:</strong></p>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={percentage}
-                  onChange={handlePercentageChange}
-                />
-              </div>
-              <button onClick={handleAlertSubmit} className="btn btn-primary ms-4 px-4 py-3">
-                NOTIFY ME!
-              </button>
+        <div className="col-md-3">
+          <div className="bg-white shadow rounded p-3 text-center">
+            <p className="mb-1 text-muted small">Amazon.com</p>
+            <h4 className="text-primary">Current Price: <span className="fw-bold">${product.currentPrice}</span></h4>
+            <div className="d-flex flex-wrap justify-content-center gap-2 mt-3">
+              <button className="btn btn-danger">Target ${product.targetPrice || '82.37'}</button>
+              <button className="btn btn-warning">Walmart ${product.walmartPrice || '79.43'}</button>
+              <button className="btn btn-secondary">Etsy ${product.etsyPrice || '102.58'}</button>
+              <button className="btn btn-info">Alibaba ${product.alibabaPrice || '91.24'}</button>
             </div>
           </div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-5">
           <div className="bg-white shadow rounded p-3">
             <div className="d-flex justify-content-between align-items-center">
               <p className="mb-0 text-muted small">Amazon.com</p>
               <h5 className="fw-bold">Past 52 Weeks:</h5>
             </div>
-            <ResponsiveContainer width="100%" height={500}>
+            <ResponsiveContainer width="100%" height={250}>
               <LineChart data={priceHistoryData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                 <XAxis dataKey="date" />
@@ -154,6 +124,30 @@ const AnalyticsPage = () => {
               <span>Maximum: <span className="text-primary">${product.fiftyTwoWeekHigh}</span></span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="row justify-content-center mt-4">
+        <div className="col-md-5 d-flex align-items-center bg-white shadow rounded p-4">
+          <div className="flex-grow-1">
+            <p>If the price drops below <strong>this amount:</strong></p>
+            <input
+              type="number"
+              className="form-control mb-3"
+              value={threshold}
+              onChange={handleThresholdChange}
+            />
+            <p className="mt-3">or by <strong>this percentage:</strong></p>
+            <input
+              type="number"
+              className="form-control"
+              value={percentage}
+              onChange={handlePercentageChange}
+            />
+          </div>
+          <button onClick={handleAlertSubmit} className="btn btn-primary ms-4 px-4 py-3">
+            NOTIFY ME!
+          </button>
         </div>
       </div>
 

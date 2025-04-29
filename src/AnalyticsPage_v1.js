@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const AnalyticsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { product, url, storeName } = location.state;
-
+  
   const [threshold, setThreshold] = useState('');
   const [percentage, setPercentage] = useState('20');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -64,100 +63,51 @@ const AnalyticsPage = () => {
     navigate('/');
   };
 
-  // Dummy price history if not provided
-  const dummyHistory = [
-    { date: 'Dec', price: product.fiftyTwoWeekLow },
-    { date: 'Jan', price: product.medianPrice + 10 },
-    { date: 'Feb', price: product.fiftyTwoWeekHigh },
-    { date: 'Mar', price: product.fiftyTwoWeekLow + 5 },
-    { date: 'Apr', price: product.currentPrice },
-  ];
-  const priceHistoryData = product.priceHistory && product.priceHistory.length > 0 ? product.priceHistory : dummyHistory;
-
   return (
-    <div className="container-fluid py-5 px-4" style={{ backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+    <div className="container py-5 text-center" style={{ backgroundColor: '#007bff', color: 'white', minHeight: '100vh', minWidth: '100vw' }}>
       <button
         onClick={() => navigate('/track', { state: { storeName } })}
         className="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
-        style={{ width: '50px', height: '50px' }}
-      >
-        <i className="bi bi-arrow-left"></i>
+        style={{ width: '10vh', height: '10vh' }}
+        >
+          <i className="bi bi-arrow-left"></i>
       </button>
 
-      <div className="row justify-content-center align-items-start">
-        <div className="col-md-6">
-          <div className="row">
-            <p className="fw-bold text-primary text-center">Product Selected: <span className="text-dark">{product.productName}</span></p>
-          </div>
-          
-          <div className="row justify-content-center mt-4">
-            <div className="col-md-6 text-center">
-              <img src={product.imageUrl} alt={product.productName} className="img-fluid mb-3 shadow rounded" style={{ maxHeight: '250px' }} />
-            </div>
-            <div className="col-md-6">
-              <div className="bg-white shadow rounded p-3 text-center">
-                <p className="mb-1 text-muted small">Amazon.com</p>
-                <h4 className="text-primary">Current Price: <span className="fw-bold">${product.currentPrice}</span></h4>
-                <div className="d-flex flex-wrap justify-content-center gap-2 mt-3">
-                  <button className="btn btn-danger">Target ${product.targetPrice || '82.37'}</button>
-                  <button className="btn btn-warning">Walmart ${product.walmartPrice || '79.43'}</button>
-                  <button className="btn btn-secondary">Etsy ${product.etsyPrice || '102.58'}</button>
-                  <button className="btn btn-info">Alibaba ${product.alibabaPrice || '91.24'}</button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <h1 className="mb-4">Analytics for {product.productName}</h1>
+      <p>URL: {url}</p>
+      <p>Current Price: ${product.currentPrice}</p>
+      <p>52-Week High: ${product.fiftyTwoWeekHigh}</p>
+      <p>52-Week Low: ${product.fiftyTwoWeekLow}</p>
+      <p>Median Price: ${product.medianPrice}</p>
 
-          <div className="row justify-content-center mt-4">
-            <div className="col-md-10 d-flex align-items-center bg-white shadow rounded p-4">
-              <div className="flex-grow-1">
-                <p>If the price drops below <strong>this amount:</strong></p>
-                <input
-                  type="number"
-                  className="form-control mb-3"
-                  value={threshold}
-                  onChange={handleThresholdChange}
-                />
-                <p className="mt-3">or by <strong>this percentage:</strong></p>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={percentage}
-                  onChange={handlePercentageChange}
-                />
-              </div>
-              <button onClick={handleAlertSubmit} className="btn btn-primary ms-4 px-4 py-3">
-                NOTIFY ME!
-              </button>
-            </div>
-          </div>
+      <form onSubmit={handleAlertSubmit} className="d-flex flex-column align-items-center">
+        <div className="form-group mb-3">
+          <label htmlFor="threshold">Below what value should you be alerted:</label>
+          <input
+            type="number"
+            className="form-control"
+            id="threshold"
+            value={threshold}
+            onChange={handleThresholdChange}
+            style={{ maxWidth: '200px' }}
+          />
         </div>
-
-        <div className="col-md-6">
-          <div className="bg-white shadow rounded p-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="mb-0 text-muted small">Amazon.com</p>
-              <h5 className="fw-bold">Past 52 Weeks:</h5>
-            </div>
-            <ResponsiveContainer width="100%" height={500}>
-              <LineChart data={priceHistoryData} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
-                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                <XAxis dataKey="date" />
-                <YAxis domain={['auto', 'auto']} />
-                <Tooltip />
-                <Line type="monotone" dataKey="price" stroke="#3366cc" strokeWidth={3} />
-              </LineChart>
-            </ResponsiveContainer>
-            <div className="d-flex justify-content-between mt-2 small">
-              <span>Median: <span className="text-primary">${product.medianPrice}</span></span>
-              <span>Minimum: <span className="text-primary">${product.fiftyTwoWeekLow}</span></span>
-              <span>Maximum: <span className="text-primary">${product.fiftyTwoWeekHigh}</span></span>
-            </div>
-          </div>
+        <div className="form-group mb-3">
+          <label htmlFor="percentage">What percent off would you like to be alerted:</label>
+          <input
+            type="number"
+            className="form-control"
+            id="percentage"
+            value={percentage}
+            onChange={handlePercentageChange}
+            style={{ maxWidth: '200px' }}
+          />
         </div>
-      </div>
+        <button type="submit" className="btn btn-primary">
+          Set Alerts
+        </button>
+      </form>
 
-      {/* Confirmation Modal */}
       {showConfirmModal && (
         <>
           <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
@@ -197,7 +147,6 @@ const AnalyticsPage = () => {
         </>
       )}
 
-      {/* Success Modal */}
       {showSuccessModal && (
         <>
           <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">

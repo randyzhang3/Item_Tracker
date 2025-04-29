@@ -2,6 +2,7 @@
     {
       "productName": "Amazon Echo Dot (5th Gen)",
       "url": "https://www.amazon.com/echo-dot-5th-gen/dp/B09B8V1LZP/",
+      "imageUrl": "https://c.media-amazon.com/images/I/710exCeNPJL._AC_SY355_.jpg",
       "currentPrice": 39.99,
       "fiftyTwoWeekHigh": 59.99,
       "fiftyTwoWeekLow": 29.99,
@@ -10,6 +11,7 @@
     {
       "productName": "Walmart AirPods Pro",
       "url": "https://www.walmart.com/ip/Apple-AirPods-Pro/520468661",
+      "imageUrl": "https://i5.walmartimages.com/seo/Pre-Owned-Apple-Watch-Series-5-2019-44mm-GPS-Cellular-Stainless-Steel-Case-White-Sport-Band_1b38440f-6e43-4d35-81a8-ffdc280e050c_1.d03a0241b235272a42dc80fe7b56885e.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF",
       "currentPrice": 189.00,
       "fiftyTwoWeekHigh": 249.00,
       "fiftyTwoWeekLow": 179.00,
@@ -18,6 +20,7 @@
     {
       "productName": "Target Instant Pot Duo",
       "url": "https://www.target.com/p/instant-pot-duo-7-in-1-pressure-cooker/-/A-76543443",
+      "imageUrl": "https://target.scene7.com/is/image/Target/GUEST_779a4d28-dd27-49d8-a6e8-5edf8e089765",
       "currentPrice": 89.99,
       "fiftyTwoWeekHigh": 129.99,
       "fiftyTwoWeekLow": 69.99,
