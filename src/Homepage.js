@@ -17,7 +17,11 @@ const Homepage = () => {
   };
 
   const helpButtonClick = () => {
-    setShowFAQ(true);
+    if (!showFAQ) {
+      setShowFAQ(true);
+    } else {
+      setShowFAQ(false);
+    }
   };
 
   return (
@@ -114,28 +118,80 @@ const Homepage = () => {
         <div
           className="position-fixed top-50 start-50 translate-middle p-4"
           style={{
-            backgroundColor: "white",
+            backgroundColor: "#172F78",
+            opacity: "0.85",
             borderRadius: "20px",
             boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
             zIndex: 1050,
-            width: "80%",
-            maxWidth: "500px",
+            width: "40%",
+            maxWidth: "800px",
           }}
         >
-          <h3 className="text-center mb-3" style={{ color: "#333" }}>
-            FAQ
-          </h3>
-          <div className="d-flex flex-column gap-3">
-            <button className="btn btn-outline-primary">FAQ 1</button>
-            <button className="btn btn-outline-primary">FAQ 2</button>
-            <button className="btn btn-outline-primary">FAQ 3</button>
-          </div>
-          <button
-            className="btn btn-danger mt-4 w-100"
-            onClick={() => setShowFAQ(false)}
+          <h3
+            className="text-center mb-4"
+            style={{ fontSize: "35px", color: "white" }}
           >
-            Close Window
-          </button>
+            Feeling Stuck?
+          </h3>
+          <div className="d-flex flex-row align-items-center gap-4 justify-content-center">
+            <button
+              className="btn btn-primary d-flex flex-column align-items-center"
+              style={{ width: "140px", height: "140px" }}
+            >
+              <img
+                src="images\faq_icons\gears-solid.svg"
+                alt="Cog Icon"
+                style={{
+                  width: "100px",
+                  height: "auto",
+                  marginBottom: "15px",
+                  marginTop: "5px",
+                }}
+              />
+              How It Works
+            </button>
+            <button
+              className="btn btn-primary d-flex flex-column align-items-center"
+              style={{ width: "140px", height: "140px" }}
+            >
+              <img
+                src="images\faq_icons\money-bill-trend-up-solid.svg"
+                alt="Money Bill Icon"
+                style={{
+                  width: "auto",
+                  height: "80px",
+                  marginBottom: "15px",
+                  marginTop: "5px",
+                }}
+              />
+              Price Tracking
+            </button>
+            <button
+              className="btn btn-primary d-flex flex-column align-items-center"
+              style={{ width: "140px", height: "140px" }}
+            >
+              <img
+                src="images\faq_icons\user-solid.svg"
+                alt="User Icon"
+                style={{
+                  width: "auto",
+                  height: "80px",
+                  marginBottom: "15px",
+                  marginTop: "5px",
+                }}
+              />
+              Your Data
+            </button>
+          </div>
+          <div className="text-center">
+            <button
+              className="btn btn-danger mt-4"
+              style={{ width: "50%" }}
+              onClick={() => setShowFAQ(false)}
+            >
+              Close Window
+            </button>
+          </div>
         </div>
       )}
 
