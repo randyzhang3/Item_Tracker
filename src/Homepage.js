@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import FAQModal from "./components/modals/faq_modal";
+import HelpButton from "./components/help_button";
 
 const stores = [
   { name: "Amazon", img: "/images/amazon.svg", color: "#f7b733" },
@@ -89,111 +91,11 @@ const Homepage = () => {
             </div>
           ))}
         </div>
-        <div
-          className="position-fixed"
-          style={{
-            bottom: "20px",
-            right: "20px",
-            zIndex: 1000,
-          }}
-        >
-          <button
-            className="btn btn-primary rounded-circle"
-            style={{
-              width: "60px",
-              height: "60px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onClick={helpButtonClick}
-          >
-            ?
-          </button>
-        </div>
       </div>
+      <HelpButton helpButtonClick={helpButtonClick} />
 
-      {showFAQ && (
-        <div
-          className="position-fixed top-50 start-50 translate-middle p-4"
-          style={{
-            backgroundColor: "#172F78",
-            opacity: "0.85",
-            borderRadius: "20px",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
-            zIndex: 1050,
-            width: "40%",
-            maxWidth: "800px",
-          }}
-        >
-          <h3
-            className="text-center mb-4"
-            style={{ fontSize: "35px", color: "white" }}
-          >
-            Feeling Stuck?
-          </h3>
-          <div className="d-flex flex-row align-items-center gap-4 justify-content-center">
-            <button
-              className="btn btn-primary d-flex flex-column align-items-center"
-              style={{ width: "140px", height: "140px" }}
-            >
-              <img
-                src="images\faq_icons\gears-solid.svg"
-                alt="Cog Icon"
-                style={{
-                  width: "100px",
-                  height: "auto",
-                  marginBottom: "15px",
-                  marginTop: "5px",
-                }}
-              />
-              How It Works
-            </button>
-            <button
-              className="btn btn-primary d-flex flex-column align-items-center"
-              style={{ width: "140px", height: "140px" }}
-            >
-              <img
-                src="images\faq_icons\money-bill-trend-up-solid.svg"
-                alt="Money Bill Icon"
-                style={{
-                  width: "auto",
-                  height: "80px",
-                  marginBottom: "15px",
-                  marginTop: "5px",
-                }}
-              />
-              Price Tracking
-            </button>
-            <button
-              className="btn btn-primary d-flex flex-column align-items-center"
-              style={{ width: "140px", height: "140px" }}
-            >
-              <img
-                src="images\faq_icons\user-solid.svg"
-                alt="User Icon"
-                style={{
-                  width: "auto",
-                  height: "80px",
-                  marginBottom: "15px",
-                  marginTop: "5px",
-                }}
-              />
-              Your Data
-            </button>
-          </div>
-          <div className="text-center">
-            <button
-              className="btn btn-danger mt-4"
-              style={{ width: "50%" }}
-              onClick={() => setShowFAQ(false)}
-            >
-              Close Window
-            </button>
-          </div>
-        </div>
-      )}
+      {/* FAQ Modal */}
+      {showFAQ && <FAQModal setShowFAQ={setShowFAQ} />}
 
       <footer
         className="mt-auto text-center py-3"

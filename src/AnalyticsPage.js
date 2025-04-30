@@ -10,11 +10,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import FAQModal from "./components/modals/faq_modal";
+import HelpButton from "./components/help_button";
 
 const AnalyticsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { product, storeName } = location.state;
+  const [showFAQ, setShowFAQ] = useState(false);
 
   const [threshold, setThreshold] = useState("");
   const [percentage, setPercentage] = useState("20");
@@ -72,6 +75,14 @@ const AnalyticsPage = () => {
   const handleChooseAnotherStore = () => {
     setShowSuccessModal(false);
     navigate("/");
+  };
+
+  const helpButtonClick = () => {
+    if (!showFAQ && !showConfirmModal && !showSuccessModal) {
+      setShowFAQ(true);
+    } else {
+      setShowFAQ(false);
+    }
   };
 
   // Dummy price history if not provided
@@ -219,6 +230,7 @@ const AnalyticsPage = () => {
           </div>
         </div>
       </div>
+      <HelpButton helpButtonClick={helpButtonClick} />
 
       {/* Confirmation Modal */}
       {showConfirmModal && (
@@ -321,6 +333,9 @@ const AnalyticsPage = () => {
           <div className="modal-backdrop fade show"></div>
         </>
       )}
+
+      {/* FAQ Modal */}
+      {showFAQ && <FAQModal setShowFAQ={setShowFAQ} />}
     </div>
   );
 };
