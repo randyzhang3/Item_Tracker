@@ -101,22 +101,37 @@ const AnalyticsPage = () => {
   return (
     <div
       className="container-fluid py-5 px-4"
-      style={{ backgroundColor: "#f4f4f4", minHeight: "100vh" }}
+      style={{ backgroundColor: "#F5F5F7", minHeight: "100vh" }}
     >
       <button
         onClick={() => navigate("/track", { state: { storeName } })}
-        className="btn btn-light rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
-        style={{ width: "50px", height: "50px" }}
+        className="btn rounded-circle position-absolute m-3 d-flex align-items-center justify-content-center"
+        style={{
+          backgroundColor: "#2C6FFF",
+          width: "6vh",
+          height: "6vh",
+          top: "20px",
+          left: "20px",
+          border: "none",
+        }}
       >
-        <i className="bi bi-arrow-left"></i>
+        <i
+          className="bi bi-arrow-left text-white"
+          style={{ fontSize: "3vh", fontWeight: "bold" }}
+        ></i>
       </button>
 
       <div className="row justify-content-center align-items-start">
         <div className="col-md-6">
           <div className="row">
-            <p className="fw-bold text-primary text-center">
+            <p
+              className="fw-bold text-primary text-center"
+              style={{ fontSize: "30px" }}
+            >
               Product Selected:{" "}
-              <span className="text-dark">{product.productName}</span>
+              <span style={{ color: "#525252", opacity: 0.85 }}>
+                {product.productName}
+              </span>
             </p>
           </div>
 
@@ -126,27 +141,74 @@ const AnalyticsPage = () => {
                 src={product.imageUrl}
                 alt={product.productName}
                 className="img-fluid mb-3 shadow rounded"
-                style={{ maxHeight: "400px" }}
+                style={{
+                  maxHeight: "400px",
+                  padding: "30px",
+                  backgroundColor: "white",
+                }}
               />
             </div>
-            <div className="col-md-8 text-center">
+            <div
+              className="col-md-7 text-center"
+              style={{ marginBottom: "20px" }}
+            >
               <div className="bg-white shadow rounded p-3 text-center">
-                <p className="mb-1 text-muted small">Amazon.com</p>
-                <h4 className="text-primary fs-2">Current Price:</h4>
-                <h4>
-                  <span className="fw-bold fs-1">${product.currentPrice}</span>
+                <p className="mb-1 text-muted small">{storeName}</p>
+                <h4
+                  style={{
+                    color: "#2C6FFF",
+                    fontSize: "40px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Current Price:
+                </h4>
+                <h4 style={{ marginTop: "-15px" }}>
+                  <span
+                    className="fw-bold"
+                    style={{
+                      color: "#2C6FFF",
+                      fontSize: "75px",
+                    }}
+                  >
+                    ${product.currentPrice}
+                  </span>
                 </h4>
                 <div className="d-flex flex-wrap justify-content-center gap-2 mt-3">
-                  <button className="btn btn-danger">
+                  <button
+                    className="btn"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#DE5B5B",
+                    }}
+                  >
                     Target ${product.targetPrice || "82.37"}
                   </button>
-                  <button className="btn btn-warning">
+                  <button
+                    className="btn"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#FDBB30",
+                    }}
+                  >
                     Walmart ${product.walmartPrice || "79.43"}
                   </button>
-                  <button className="btn btn-secondary">
+                  <button
+                    className="btn"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#FF824C",
+                    }}
+                  >
                     Etsy ${product.etsyPrice || "102.58"}
                   </button>
-                  <button className="btn btn-info">
+                  <button
+                    className="btn"
+                    style={{
+                      color: "white",
+                      backgroundColor: "#DB6A18",
+                    }}
+                  >
                     Alibaba ${product.alibabaPrice || "91.24"}
                   </button>
                 </div>
@@ -154,7 +216,10 @@ const AnalyticsPage = () => {
             </div>
           </div>
 
-          <div className="row justify-content-center mt-2">
+          <div
+            className="row justify-content-center"
+            style={{ margin: "30px", marginTop: "40px" }}
+          >
             <div className="col-md-12 text-center">
               <div className="d-flex align-items-start bg-white shadow rounded p-4">
                 <div className="flex-grow-1">
@@ -179,7 +244,12 @@ const AnalyticsPage = () => {
                 </div>
                 <button
                   onClick={handleAlertSubmit}
-                  className="btn btn-primary ms-4 px-4 py-3"
+                  className="btn btn-primary ms-4 px-4 py-3 rounded"
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    backgroundColor: "#2C6FFF",
+                  }}
                 >
                   NOTIFY ME!
                 </button>
@@ -189,9 +259,12 @@ const AnalyticsPage = () => {
         </div>
 
         <div className="col-md-6">
-          <div className="bg-white shadow rounded p-3">
+          <div
+            className="bg-white shadow rounded p-3"
+            style={{ marginTop: "70px", marginRight: "20px" }}
+          >
             <div className="d-flex justify-content-between align-items-center">
-              <p className="mb-0 text-muted small">Amazon.com</p>
+              <p className="mb-0 text-muted small">{storeName}</p>
               <h5 className="fw-bold">Past 52 Weeks:</h5>
             </div>
             <ResponsiveContainer width="100%" height={500}>

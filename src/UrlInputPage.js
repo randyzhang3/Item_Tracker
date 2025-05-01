@@ -7,7 +7,7 @@ import HelpButton from "./components/help_button";
 
 const storeData = {
   Amazon: {
-    img: "/images/amazon.png",
+    img: "/images/amazon.svg",
     color: "#f7b733",
     urlPrefix: "https://www.amazon.com/",
   },
@@ -81,7 +81,7 @@ const UrlInputPage = () => {
     <div
       className="d-flex flex-column align-items-center justify-content-center"
       style={{
-        backgroundColor: "#f5f6fa",
+        backgroundColor: "#F5F5F7",
         minHeight: "100vh",
         width: "100vw",
         position: "relative",
@@ -89,18 +89,23 @@ const UrlInputPage = () => {
     >
       <button
         onClick={() => navigate("/")}
-        className="btn rounded-circle position-absolute top-0 start-0 m-3 d-flex align-items-center justify-content-center"
+        className="btn rounded-circle position-absolute m-3 d-flex align-items-center justify-content-center"
         style={{
           backgroundColor: store.color,
-          width: "10vh",
-          height: "10vh",
+          width: "7vh",
+          height: "7vh",
+          top: "20px",
+          left: "20px",
           border: "none",
         }}
       >
-        <i className="bi bi-arrow-left text-white"></i>
+        <i
+          className="bi bi-arrow-left text-white"
+          style={{ fontSize: "3vh", fontWeight: "bold" }}
+        ></i>
       </button>
 
-      <div className="text-center">
+      <div className="text-center" style={{ marginTop: "-40px" }}>
         <div
           className="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4"
           style={{
@@ -120,62 +125,64 @@ const UrlInputPage = () => {
           style={{
             color: store.color,
             fontWeight: "bold",
-            marginBottom: "1rem",
+            marginBottom: "10px",
             fontSize: "5vh",
           }}
         >
           What product do you want to track?
         </h1>
-        <p className="mb-4" style={{ fontSize: "2.5vh" }}>
+        <p
+          className="mb-4"
+          style={{ fontSize: "2.5vh", color: "525252", opacity: 0.85 }}
+        >
           We'll show you all the price info from the past 52 weeks.
         </p>
-
-        <form
-          onSubmit={handleSubmit}
-          className="d-flex flex-column align-items-center w-100"
-          style={{ maxWidth: "400px" }}
-        >
-          <div className="input-group mb-3 w-100">
-            <input
-              type="text"
-              className={`form-control ${
-                error ? "is-invalid" : success ? "is-valid" : ""
-              }`}
-              placeholder={`Paste your ${storeName} URL here...`}
-              value={url}
-              onChange={(e) => {
-                setUrl(e.target.value);
-                setError("");
-                setSuccess(false);
-              }}
-            />
-            <button
-              type="submit"
-              className="btn"
-              style={{
-                backgroundColor: store.color,
-                border: "none",
-                padding: "0 1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <i className="bi bi-arrow-right text-white"></i>
-            </button>
-          </div>
-          {error && <div className="text-danger mb-3">{error}</div>}
-          {success && <div className="text-success mb-3">URL looks good!</div>}
-        </form>
+        <div className="d-flex flex-column align-items-center justify-content-center">
+          <form
+            onSubmit={handleSubmit}
+            className="d-flex flex-column align-items-center w-100"
+            style={{ maxWidth: "400px" }}
+          >
+            <div className="input-group mb-3 w-100">
+              <input
+                type="text"
+                className={`form-control ${
+                  error ? "is-invalid" : success ? "is-valid" : ""
+                }`}
+                placeholder={`Paste your ${storeName} URL here...`}
+                value={url}
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  setError("");
+                  setSuccess(false);
+                }}
+              />
+              <button
+                type="submit"
+                className="btn"
+                style={{
+                  backgroundColor: store.color,
+                  border: "none",
+                  padding: "0 1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <i className="bi bi-arrow-right text-white"></i>
+              </button>
+            </div>
+            {error && <div className="text-danger mb-3">{error}</div>}
+            {success && (
+              <div className="text-success mb-3">URL looks good!</div>
+            )}
+          </form>
+        </div>
       </div>
       <HelpButton helpButtonClick={helpButtonClick} />
 
       {/* FAQ Modal */}
       {showFAQ && <FAQModal setShowFAQ={setShowFAQ} />}
-
-      <footer className="position-absolute bottom-0 mb-2 small text-muted">
-        © Price Info Tracker. All Rights Reserved.
-      </footer>
     </div>
   );
 };
