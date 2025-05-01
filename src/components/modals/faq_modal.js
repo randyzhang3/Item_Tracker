@@ -32,7 +32,7 @@ const FAQModal = ({ setShowFAQ }) => {
             style={{ width: "140px", height: "140px" }}
           >
             <img
-              src="images\faq_icons\gears-solid.svg"
+              src="images/faq_icons/gears-solid.svg"
               alt="Cog Icon"
               style={{
                 width: "100px",
