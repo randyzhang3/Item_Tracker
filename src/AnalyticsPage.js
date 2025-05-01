@@ -215,7 +215,6 @@ const AnalyticsPage = () => {
               </div>
             </div>
           </div>
-
           <div
             className="row justify-content-center"
             style={{ margin: "30px", marginTop: "40px" }}
@@ -256,6 +255,7 @@ const AnalyticsPage = () => {
               </div>
             </div>
           </div>
+
         </div>
 
         <div className="col-md-6">
